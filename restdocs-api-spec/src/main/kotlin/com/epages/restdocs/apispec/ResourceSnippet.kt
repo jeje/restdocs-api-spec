@@ -76,6 +76,7 @@ class ResourceSnippet(private val resourceSnippetParameters: ResourceSnippetPara
             ),
             response = ResponseModel(
                 status = operation.response.status.value(),
+                statusDescription = resourceSnippetParameters.statusDescription,
                 contentType = if (hasResponseBody) getContentTypeOrDefault(operation.response.headers) else null,
                 headers = resourceSnippetParameters.responseHeaders.withExampleValues(operation.response.headers),
                 schema = resourceSnippetParameters.responseSchema,
@@ -140,6 +141,7 @@ class ResourceSnippet(private val resourceSnippetParameters: ResourceSnippetPara
 
     private data class ResponseModel(
         val status: Int,
+        val statusDescription: String?,
         val contentType: String?,
         val schema: Schema? = null,
         val headers: List<HeaderDescriptorWithType>,

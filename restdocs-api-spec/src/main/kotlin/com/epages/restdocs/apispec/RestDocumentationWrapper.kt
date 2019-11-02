@@ -98,6 +98,7 @@ abstract class RestDocumentationWrapper {
                     .description(resourceDetails.description)
                     .requestSchema(resourceDetails.requestSchema)
                     .responseSchema(resourceDetails.responseSchema)
+                    .statusDescription(resourceDetails.statusDescription)
                     .summary(resourceDetails.summary)
                     .privateResource(resourceDetails.privateResource)
                     .deprecated(resourceDetails.deprecated)

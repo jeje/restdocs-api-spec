@@ -17,6 +17,7 @@ import java.util.Optional
 data class ResourceSnippetParameters @JvmOverloads constructor(
     val summary: String? = null,
     val description: String? = null,
+    val statusDescription: String? = null,
     val privateResource: Boolean = false,
     val deprecated: Boolean = false,
     val requestSchema: Schema? = null,
@@ -157,6 +158,7 @@ abstract class ResourceSnippetDetails {
     var requestSchema: Schema? = null
         protected set
     var responseSchema: Schema? = null
+    var statusDescription: String? = null
         protected set
     var privateResource: Boolean = false
         protected set
@@ -169,6 +171,7 @@ abstract class ResourceSnippetDetails {
     abstract fun description(description: String?): ResourceSnippetDetails
     abstract fun requestSchema(requestSchema: Schema?): ResourceSnippetDetails
     abstract fun responseSchema(responseSchema: Schema?): ResourceSnippetDetails
+    abstract fun statusDescription(statusDescription: String?): ResourceSnippetDetails
     abstract fun privateResource(privateResource: Boolean): ResourceSnippetDetails
     abstract fun deprecated(deprecated: Boolean): ResourceSnippetDetails
     abstract fun tag(tag: String): ResourceSnippetDetails
@@ -195,6 +198,7 @@ class ResourceSnippetParametersBuilder : ResourceSnippetDetails() {
     override fun description(description: String?) = apply { this.description = description }
     override fun requestSchema(requestSchema: Schema?) = apply { this.requestSchema = requestSchema }
     override fun responseSchema(responseSchema: Schema?) = apply { this.responseSchema = responseSchema }
+    override fun statusDescription(statusDescription: String?) = apply { this.statusDescription = statusDescription }
     override fun privateResource(privateResource: Boolean) = apply { this.privateResource = privateResource }
     override fun deprecated(deprecated: Boolean) = apply { this.deprecated = deprecated }
 
@@ -239,6 +243,7 @@ class ResourceSnippetParametersBuilder : ResourceSnippetDetails() {
     fun build() = ResourceSnippetParameters(
         summary,
         description,
+        statusDescription,
         privateResource,
         deprecated,
         requestSchema,
