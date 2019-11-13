@@ -141,7 +141,7 @@ object OpenApi3Generator {
         val schemaKey = if (schemasToKeys.containsKey(schema)) {
             schemasToKeys[schema]!!
         } else {
-            val name = schema.name ?: schemaNameGenerator(schema)
+            val name = if (schema.name != null) schema.name else schemaNameGenerator(schema)
             schemasToKeys[schema] = name
             name
         }
@@ -271,7 +271,7 @@ object OpenApi3Generator {
                     },
                     examplesWithOperationId = requests.filter { it.request.example != null }.map { it.operationId to it.request.example!! }.toMap(),
                     contentType = contentType,
-                    schemaName = requests.first().request.schema?.name
+                    schemaName = requests.first().request.schema
                 )
             }.toMap()
             .let { contentTypeToMediaType ->
@@ -321,7 +321,7 @@ object OpenApi3Generator {
                     requestFields = requests.flatMap { it.response.responseFields },
                     examplesWithOperationId = requests.map { it.operationId to it.response.example!! }.toMap(),
                     contentType = contentType,
-                    schemaName = responseModelsSameStatus.first().response.schema?.name
+                    schemaName = responseModelsSameStatus.first().response.schema
                 )
             }.toMap()
             .let { contentTypeToMediaType ->
